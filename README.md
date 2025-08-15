@@ -52,8 +52,7 @@ App will be available at http://127.0.0.1:8000/
 - This project uses OpenStreetMap tiles in the browser (no API key required) and opens OSM routing links for directions.
 - Admin can be enabled by creating a superuser: `python manage.py createsuperuser`.
 
----
-MIT License
+
 
 
 >>>>>>> 6a1fa26 (first commit)
