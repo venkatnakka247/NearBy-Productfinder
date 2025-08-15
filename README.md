@@ -48,7 +48,7 @@ App will be available at http://127.0.0.1:8000/
 - Admin can be enabled by creating a superuser: `python manage.py createsuperuser`.
 
 ![Merchant Dashboard](projimages/merchantdashboard.png)
-![productfind](projimages/productfind.png)
+![productfind](projimages/productsfind.png)
 ![userhomepage](projimages/userhomepage.png)
 ![userproductpage](projimages/userproductpage.png)
 ![productlocation](projimages/productlocation.png)
