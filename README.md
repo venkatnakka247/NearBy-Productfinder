@@ -43,14 +43,15 @@ App will be available at http://127.0.0.1:8000/
 - Uploaded images are stored under `media/product_images/`
 - Static files in `static/`; collected assets in `staticfiles/` (ignored by git)
 
-## Environment
-- DEBUG is enabled for development. For production, disable DEBUG and switch to PostgreSQL or another production DB. Consider S3 (or similar) for media storage.
-
 ## Notes
 - This project uses OpenStreetMap tiles in the browser (no API key required) and opens OSM routing links for directions.
 - Admin can be enabled by creating a superuser: `python manage.py createsuperuser`.
 
+![Merchant Dashboard ](projimages/merchand dashboard.png)
+![Merchant Dashboard ](projimages/productfind.png)
+![Merchant Dashboard ](projimages/user home page.png)
+![Merchant Dashboard ](projimages/user product page.png)
+![Merchant Dashboard ](projimages/product location.png)
 
 
 
->>>>>>> 6a1fa26 (first commit)
