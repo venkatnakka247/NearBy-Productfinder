@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Products</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'merchant_dashboard' %}" class="logo">
+            ProductFinder
+        </a>
+        <div class="nav-links">
+            <a href="{% url 'merchant_dashboard' %}">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="welcome-text">Here are all the products listed in your shop. Manage them easily!</div>
+        <h2>Your Products</h2>
+        {% if products %}
+            <div class="product-list">
+            {% for product in products %}
+                <div class="product-card" style="display: flex; flex-direction: column; align-items: center; padding: 24px 18px 18px 18px;">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                    <div style="font-weight: bold; font-size: 1.1rem; margin: 10px 0 4px 0;">{{ product.name }}</div>
+                    <div style="color: #555; margin-bottom: 8px;">{{ product.description|truncatechars:100 }}</div>
+                    <div style="margin-bottom: 8px;">Price: <span style="color: #1976d2; font-weight: 600;">₹{{ product.price }}</span></div>
+                    <form method="post" style="width: 100%; margin: 0; padding: 0; background: transparent; border: none; box-shadow: none;">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button type="submit" class="delete-btn" style="width: 90%; display: block; margin: 10px auto 0 auto; border: none; outline: none;">Delete</button>
+                    </form>
+                    <a href="{% url 'edit_product' product.id %}" style="width: 90%; display: block; margin: 10px auto 0 auto; text-align: center; padding: 10px; background: #1976d2; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">Edit</a>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No products found.</p>
+        {% endif %}
+        <a href="{% url 'merchant_dashboard' %}">Back to Dashboard</a>
+    </div>
+</body>
+</html> 
