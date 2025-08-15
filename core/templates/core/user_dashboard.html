@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=2.0">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            ProductFinder
+        </a>
+        <div class="nav-links">
+            <a href="{% url 'user_dashboard' %}">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+    {% if query or selected_city %}
+    <a href="{% url 'user_dashboard' %}" class="back-btn" style="display: block; margin: 24px auto 0 auto; width: fit-content; padding: 10px 22px; background: #1976d2; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 600; letter-spacing: 1px; box-shadow: 0 2px 8px rgba(25,118,210,0.10); transition: background 0.2s;">&larr; Back to Dashboard</a>
+    {% endif %}
+    {% if not query %}
+    <div class="searchbar-sticky">
+        <form method="get" class="search-form">
+            <div class="search-container">
+                <div class="search-input-group">
+                    <label for="city-select" class="search-label">📍 City</label>
+                    <select name="city" id="city-select" class="city-select">
+                        <option value="">Choose your city</option>
+                        <option value="Mumbai" {% if selected_city == 'Mumbai' %}selected{% endif %}>Mumbai</option>
+                        <option value="Delhi" {% if selected_city == 'Delhi' %}selected{% endif %}>Delhi</option>
+                        <option value="Bangalore" {% if selected_city == 'Bangalore' %}selected{% endif %}>Bangalore</option>
+                        <option value="Chennai" {% if selected_city == 'Chennai' %}selected{% endif %}>Chennai</option>
+                        <option value="Kolkata" {% if selected_city == 'Kolkata' %}selected{% endif %}>Kolkata</option>
+                        <option value="Hyderabad" {% if selected_city == 'Hyderabad' %}selected{% endif %}>Hyderabad</option>
+                        <option value="Pune" {% if selected_city == 'Pune' %}selected{% endif %}>Pune</option>
+                        <option value="Ahmedabad" {% if selected_city == 'Ahmedabad' %}selected{% endif %}>Ahmedabad</option>
+                        <option value="Jaipur" {% if selected_city == 'Jaipur' %}selected{% endif %}>Jaipur</option>
+                        <option value="Lucknow" {% if selected_city == 'Lucknow' %}selected{% endif %}>Lucknow</option>
+                    </select>
+                </div>
+                <div class="search-input-group">
+                    <label for="product-search" class="search-label">🔍 Product</label>
+                    <input type="text" name="q" id="product-search" placeholder="What are you looking for?" value="{{ query }}" class="product-search">
+                </div>
+                <button type="submit" class="search-button">
+                    <span>Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="dashboard-info-row">
+        <div class="dashboard-info-card">
+            <img src="https://img.icons8.com/fluency/48/000000/product.png" alt="Find Products Nearby" style="margin-bottom: 10px;"/>
+            <h3>Find Products Nearby</h3>
+            <p>Find the product you are searching for at your nearest shop.</p>
+        </div>
+        <div class="dashboard-info-card">
+            <img src="https://img.icons8.com/fluency/48/000000/marker.png" alt="Get Directions" style="margin-bottom: 10px;"/>
+            <h3>Get Directions</h3>
+            <p>Get instant directions to the shop from your location.</p>
+        </div>
+        <div class="dashboard-info-card">
+            <img src="https://img.icons8.com/fluency/48/000000/shop.png" alt="Shop Details" style="margin-bottom: 10px;"/>
+            <h3>Shop Details</h3>
+            <p>View shop details, contact info, and more for a seamless experience.</p>
+        </div>
+    </div>
+    {% endif %}
+    <div class="dashboard-results">
+        {% if query or selected_city %}
+            <h3>
+                {% if query and selected_city %}
+                    Results for "{{ query }}" in {{ selected_city }}:
+                {% elif query %}
+                    Results for "{{ query }}":
+                {% elif selected_city %}
+                    All products in {{ selected_city }}:
+                {% endif %}
+            </h3>
+            {% if results %}
+                <ul>
+                {% for product in results %}
+                    <li>
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100"><br>
+                        <strong>{{ product.name }}</strong><br>
+                        {{ product.description }}<br>
+                        Price: ₹{{ product.price }}<br>
+                        <strong>Shop:</strong> {{ product.shop.name }}<br>
+                        <strong>Location:</strong> {{ product.shop.address }}<br>
+                        <strong>City:</strong> {{ product.shop.city }}<br>
+                        <button onclick="window.open('https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route={{ product.shop.latitude }},{{ product.shop.longitude }}', '_blank')">Get Directions</button>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No products found.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html> 
