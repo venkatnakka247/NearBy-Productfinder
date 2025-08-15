@@ -1,6 +1,4 @@
-#NearBy Productfinder
-=======
-# ProductFinder (Django)
+#ProductFinder )
 
 ProductFinder is a location-based product discovery app that helps users find products in nearby shops and get directions. Merchants can register their shop, add products (with images), and manage listings.
 
