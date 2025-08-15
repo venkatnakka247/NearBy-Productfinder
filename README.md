@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #NearBy Productfinder
 =======
 # ProductFinder (Django)
