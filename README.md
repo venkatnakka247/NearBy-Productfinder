@@ -6,7 +6,7 @@ ProductFinder is a location-based product discovery app that helps users find pr
 - Django 5.2
 - SQLite (dev)
 - HTML/CSS/JavaScript
-- Leaflet.js + OpenStreetMap (tiles/routing links)
+-  OpenStreetMap 
 
 ## Features
 - User authentication (merchant vs user)
